@@ -28,4 +28,18 @@ public class Billfold
         }
         return "[" + str1 + " | " + str2 + "]";
     }
+    
+    public int getExpiredCardCount()
+    {
+        int counter = 0;
+        if (card1.isExpired() == true)
+        {
+            counter++;
+        }
+        if (card2.isExpired() == true)
+        {
+            counter++;
+        }
+        return counter;
+    }
 }
