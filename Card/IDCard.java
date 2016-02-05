@@ -31,4 +31,12 @@ public class IDCard extends Card
         }
         return false;
     }
+    
+    public String toString()
+    {
+        String str = "IDCard[";
+        str += "Name: " + this.getName() + "]";
+        str += "[ID Number: " + this.idNumber + "]";
+        return str;
+    }
 }

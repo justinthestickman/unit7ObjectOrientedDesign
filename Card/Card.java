@@ -26,4 +26,11 @@ public class Card
     {
         return "Card holder: " + name;
     }
+    
+    public String toString()
+    {
+        String str = "Card[";
+        str += "Name: " + this.name + "]";
+        return str;
+    }
 }

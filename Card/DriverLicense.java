@@ -30,4 +30,12 @@ public class DriverLicense extends Card
             return false;
         }
     }
+    
+    public String toString()
+    {
+        String str = "DriverLicense[";
+        str += "Name: " + this.getName() + "]";
+        str += "[Expiration Year: " + this.expirationYear + "]";
+        return str;
+    }
 }
