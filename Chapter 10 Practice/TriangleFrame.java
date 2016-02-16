@@ -10,15 +10,23 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TriangleDrawer
+public class TriangleFrame extends JFrame
 {
     private static final int FRAME_WIDTH = 1000;
     private static final int FRAME_HEIGHT = 750;
     
-    public TriangleDrawer()
+    
+    
+    public TriangleFrame()
     {
         
+        
+        MouseListener listener = new MousePressListener();
+        
+        
     }
+    
+
     
     public class MousePressListener implements MouseListener
     {
@@ -26,6 +34,7 @@ public class TriangleDrawer
         {
             int x = event.getX();
             int y = event.getY();
+            
         }
         
         public void mouseReleased(MouseEvent event){}
