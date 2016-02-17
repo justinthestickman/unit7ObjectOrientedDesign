@@ -15,18 +15,18 @@ public class TriangleFrame extends JFrame
     private static final int FRAME_WIDTH = 1000;
     private static final int FRAME_HEIGHT = 750;
     
-    
+    private TriangleComponent scene;
     
     public TriangleFrame()
     {
-        
+        this.scene = new TriangleComponent();
+        this.add(scene);
         
         MouseListener listener = new MousePressListener();
+        this.scene.addMouseListener(listener);
         
-        
+        this.setSize(FRAME_WIDTH,FRAME_HEIGHT);
     }
-    
-
     
     public class MousePressListener implements MouseListener
     {
@@ -34,7 +34,7 @@ public class TriangleFrame extends JFrame
         {
             int x = event.getX();
             int y = event.getY();
-            
+            scene.drawNext(x,y);
         }
         
         public void mouseReleased(MouseEvent event){}
