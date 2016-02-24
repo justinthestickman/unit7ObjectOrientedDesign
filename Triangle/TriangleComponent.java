@@ -80,6 +80,4 @@ public class TriangleComponent extends JComponent
         {
         }
     }
-    
-
 }

@@ -1,40 +1,50 @@
+import java.awt.geom.Point2D;
+import java.awt.Color;
+import java.awt.Graphics2D;
 
-
-/**
- * Write a description of class Square here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Square
+public class Square extends Shape
 {
-    /** description of instance variable x (add comment for each instance variable) */
-    private int x;
-
-    /**
-     * Default constructor for objects of class Square
-     */
-    public Square()
+    private Point2D.Double center;
+    private double radius;
+    private Color color;
+    
+    public Square(Point2D.Double center, double radius, Color color)
     {
-        // initialise instance variables
-        x = 0;
+        super(center, radius, color);
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *    that describes the operation of the method
-     *
-     * @pre        preconditions for the method
-     *            (what the method assumes about the method's parameters and class's state)
-     * @post    postconditions for the method
-     *            (what the method guarantees upon completion)
-     * @param    y    description of parameter y
-     * @return    description of the return value
-     */
-    public int sampleMethod(int y)
+    
+    public Point2D.Double getCenter()
     {
-        // put your code here
-        return x+y;
+        return this.center;
     }
+    
+    public double getRadius()
+    {
+        return this.radius;
+    }
+    
+    public void move(double x, double y)
+    {
 
+    }
+    
+    public void setRadius(double r)
+    {
+        this.radius = r;
+    }
+    
+    public boolean isInside(Point2D.Double point)
+    {
+        return false;
+    }
+    
+    public boolean isOnBorder(Point2D.Double point)
+    {
+        return false;
+    }
+    
+    public void draw(Graphics2D g2, boolean filled)
+    {
+        
+    }
 }

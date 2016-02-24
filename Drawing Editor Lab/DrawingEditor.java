@@ -23,6 +23,7 @@ public class DrawingEditor extends JFrame
         
         this.add(this.panel);
         
+        this.setTitle("Drawing Editor");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
