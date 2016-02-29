@@ -6,6 +6,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.geom.Ellipse2D;
+import java.util.Random;
 
 public class DrawingPanel extends JPanel
 {
@@ -14,12 +16,15 @@ public class DrawingPanel extends JPanel
     private boolean picked;
     private boolean moved;
     private boolean stretched;
+    private Color currDrawingColor;
         
     public DrawingPanel()
     {
         this.setBackground(Color.WHITE);
         
         this.shapes = new ArrayList<Shape>();
+        
+        this.currDrawingColor = Color.BLUE;
     }
     
     public Color getColor()
@@ -40,7 +45,10 @@ public class DrawingPanel extends JPanel
     
     public void addCircle()
     {
-        
+        Random random = new Random();
+        int radius = random.nextInt();
+        Circle newCircle = new Circle(125, 37, radius, radius);
+        this.shapes.add(newCircle);
     }
     
     public void addSquare()
