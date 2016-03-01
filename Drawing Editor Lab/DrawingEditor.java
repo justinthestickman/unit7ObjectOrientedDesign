@@ -1,36 +1,30 @@
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.BorderLayout;
 
 public class DrawingEditor extends JFrame
 {
-    private static final int FRAME_WIDTH = 250;
-    private static final int FRAME_HEIGHT = 75;
-    
-    private JPanel panel;
+    private static final int FW = 1000;
+    private static final int FH = 750;
     
     private DrawingPanel canvas;
     private ControlPanel controls;
     
     public DrawingEditor()
     {
-        this.panel = new JPanel();
-        
         this.canvas = new DrawingPanel();
-        this.panel.add(canvas);
-        
         this.controls = new ControlPanel(canvas);
-        this.panel.add(controls);
         
-        this.add(this.panel);
+        this.add(this.canvas, BorderLayout.CENTER);
+        this.add(this.controls, BorderLayout.SOUTH);
         
         this.setTitle("Drawing Editor");
-        this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        this.setSize(FW, FH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
     
     public static void main(String[] args)
     {
-        DrawingEditor drawingEditor = new DrawingEditor();
+        DrawingEditor scene = new DrawingEditor();
     }
 }

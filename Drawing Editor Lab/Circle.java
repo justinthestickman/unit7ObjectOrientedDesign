@@ -1,21 +1,21 @@
 import java.awt.geom.Point2D;
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.Graphics2D;
 
 public class Circle extends Shape
 {
-    private Ellipse2D.Double circle;
     private Point2D.Double center;
     private double radius;
     private Color color;
+    private Ellipse2D.Double circle;
     
     public Circle(Point2D.Double center, double radius, Color color)
     {
-        this.circle = new Ellipse2D.Double(center.getX(), center.getY(), radius*2, radius*2);
+        super(center, radius, color);
         this.center = center;
         this.radius = radius;
-        this.color = Color.BLUE;
+        this.circle = new Ellipse2D.Double(center.getX(), center.getY(), radius*2, radius*2);
     }
     
     public Point2D.Double getCenter()
@@ -30,7 +30,7 @@ public class Circle extends Shape
     
     public void move(double x, double y)
     {
-        
+
     }
     
     public void setRadius(double r)
@@ -43,10 +43,10 @@ public class Circle extends Shape
         return false;
     }
     
-    //public boolean isOnBorder(Point2D.Double point)
-    //{
-    //    return false;
-    //}
+    public boolean isOnBorder(Point2D.Double point)
+    {
+        return false;
+    }
     
     public void draw(Graphics2D g2, boolean filled)
     {

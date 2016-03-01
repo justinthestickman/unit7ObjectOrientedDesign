@@ -2,7 +2,7 @@ import java.awt.geom.Point2D;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class Shape
+abstract class Shape
 {
     private Point2D.Double center;
     private double radius;

@@ -1,10 +1,9 @@
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.event.*;
 import java.util.ArrayList;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.geom.Point2D;
 import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
@@ -22,6 +21,12 @@ public class DrawingPanel extends JPanel
     {
         this.setBackground(Color.WHITE);
         
+        MousePressListener pressListener = new MousePressListener();
+        this.addMouseListener(pressListener);
+        
+        MouseMovementListener moveListener = new MouseMovementListener();
+        this.addMouseMotionListener(moveListener);
+        
         this.shapes = new ArrayList<Shape>();
         
         this.currDrawingColor = Color.BLUE;
@@ -29,31 +34,41 @@ public class DrawingPanel extends JPanel
     
     public Color getColor()
     {
-        return Color.WHITE;
+        return this.currDrawingColor;
     }
     
     public Dimension getPreferredSize()
     {
-        Dimension asdf = new Dimension();
-        return asdf;
+        Dimension dimension = new Dimension(1000, 750);
+        return dimension;
     }
     
     public void pickColor()
     {
+        JColorChooser colorChooser = new JColorChooser(Color.BLUE);
         
     }
     
     public void addCircle()
     {
-        Random random = new Random();
-        int radius = random.nextInt();
-        Circle newCircle = new Circle(125, 37, radius, radius);
-        this.shapes.add(newCircle);
+         double x = this.getPreferredSize().getWidth() / 2;
+         double y = this.getPreferredSize().getHeight() / 2;
+         Point2D.Double center = new Point2D.Double(x, y);
+         Random random = new Random();
+         int radius = random.nextInt();
+         Circle newCircle = new Circle(center, radius, this.currDrawingColor);
+         this.shapes.add(newCircle);
     }
     
     public void addSquare()
     {
-        
+         double x = this.getPreferredSize().getWidth() / 2;
+         double y = this.getPreferredSize().getHeight() / 2;
+         Point2D.Double center = new Point2D.Double(x, y);
+         Random random = new Random();
+         int radius = random.nextInt();
+         Circle newCircle = new Circle(center, radius, this.currDrawingColor);
+         this.shapes.add(newCircle);
     }
     
     public void paintComponent(Graphics g)
@@ -63,11 +78,19 @@ public class DrawingPanel extends JPanel
     
     public class MousePressListener implements MouseListener
     {
-        public void mouseClicked(MouseEvent event)
-        {
-            
-        }
         public void mousePressed(MouseEvent event)
+        {
+            for (Shape shape : shapes)
+            {
+                Point2D.Double point = new Point2D.Double(event.getX(), event.getY());
+                if (shape.isInside(point))
+                {
+                    activeShape = shape;
+                }
+            }
+        }
+        
+        public void mouseClicked(MouseEvent event)
         {
             
         }
@@ -85,12 +108,24 @@ public class DrawingPanel extends JPanel
         }
     }
     
-    public class MouseMoveListener implements MouseMotionListener
+    public class MouseMovementListener implements MouseMotionListener
     {
         public void mouseDragged(MouseEvent event)
         {
-            
+            for (Shape shape : shapes)
+            {
+                Point2D.Double point = new Point2D.Double(event.getX(), event.getY());
+                if (shape.isInside(point))
+                {
+                    activeShape = shape;
+                }
+            }
+            Point2D.Double center = activeShape.getCenter();
+            double x = center.getX();
+            double y = center.getY();
+            activeShape.move(x, y);
         }
+        
         public void mouseMoved(MouseEvent event)
         {
             
