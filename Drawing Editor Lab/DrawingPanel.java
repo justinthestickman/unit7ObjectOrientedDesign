@@ -5,16 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.awt.Graphics;
-import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
 public class DrawingPanel extends JPanel
 {
     private ArrayList<Shape> shapes;
     private Shape activeShape;
-    private boolean picked;
-    private boolean moved;
-    private boolean stretched;
     private Color currDrawingColor;
         
     public DrawingPanel()
@@ -67,8 +63,8 @@ public class DrawingPanel extends JPanel
          Point2D.Double center = new Point2D.Double(x, y);
          Random random = new Random();
          int radius = random.nextInt();
-         Circle newCircle = new Circle(center, radius, this.currDrawingColor);
-         this.shapes.add(newCircle);
+         Square newSquare = new Square(center, radius, this.currDrawingColor);
+         this.shapes.add(newSquare);
     }
     
     public void paintComponent(Graphics g)
@@ -80,9 +76,10 @@ public class DrawingPanel extends JPanel
     {
         public void mousePressed(MouseEvent event)
         {
+            Point2D.Double point = new Point2D.Double(event.getX(), event.getY());
+            activeShape = null;
             for (Shape shape : shapes)
             {
-                Point2D.Double point = new Point2D.Double(event.getX(), event.getY());
                 if (shape.isInside(point))
                 {
                     activeShape = shape;
@@ -90,6 +87,7 @@ public class DrawingPanel extends JPanel
             }
         }
         
+        //Unused methods
         public void mouseClicked(MouseEvent event)
         {
             
@@ -112,20 +110,25 @@ public class DrawingPanel extends JPanel
     {
         public void mouseDragged(MouseEvent event)
         {
+            Point2D.Double point = new Point2D.Double(event.getX(), event.getY());
+            activeShape = null;
             for (Shape shape : shapes)
             {
-                Point2D.Double point = new Point2D.Double(event.getX(), event.getY());
                 if (shape.isInside(point))
                 {
                     activeShape = shape;
                 }
             }
-            Point2D.Double center = activeShape.getCenter();
-            double x = center.getX();
-            double y = center.getY();
-            activeShape.move(x, y);
+            if (activeShape != null)
+            {
+                Point2D.Double center = activeShape.getCenter();
+                double x = center.getX();
+                double y = center.getY();
+                activeShape.move(x, y);
+            }
         }
         
+        //Unused methods
         public void mouseMoved(MouseEvent event)
         {
             

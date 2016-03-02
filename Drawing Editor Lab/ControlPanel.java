@@ -5,11 +5,11 @@ import java.awt.event.*;
 
 public class ControlPanel extends JPanel
 {
+    private DrawingPanel canvas;
     private JButton pickColorButton;
     private JPanel currColorDisplay;
     private JButton circleButton;
     private JButton squareButton;
-    private DrawingPanel canvas;
     
     public ControlPanel(DrawingPanel canvas)
     {
