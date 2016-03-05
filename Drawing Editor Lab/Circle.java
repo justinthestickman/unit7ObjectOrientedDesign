@@ -1,55 +1,73 @@
-import java.awt.geom.Point2D;
-import java.awt.Color;
-import java.awt.geom.Ellipse2D;
-import java.awt.Graphics2D;
+import java.awt.geom.*;
+import java.awt.*;
+import java.lang.Math;
 
+/**
+ * A subclass of Shape that represents a circle on the canvas
+ * 
+ * @author Justin Huang
+ * @version 4 March 2016
+ */
 public class Circle extends Shape
 {
-    private Point2D.Double center;
-    private double radius;
-    private Color color;
-    private Ellipse2D.Double circle;
-    
+    /**
+     * The constructor for Circle objects
+     * 
+     * @param - Point2D.Double center - The center of the circle
+     *        - double radius - The radius of the circle
+     *        - Color color - The color of the circle
+     */
     public Circle(Point2D.Double center, double radius, Color color)
     {
         super(center, radius, color);
-        this.center = center;
-        this.radius = radius;
-        this.circle = new Ellipse2D.Double(center.getX(), center.getY(), radius*2, radius*2);
     }
     
-    public Point2D.Double getCenter()
-    {
-        return this.center;
-    }
-    
-    public double getRadius()
-    {
-        return this.radius;
-    }
-    
-    public void move(double x, double y)
-    {
-
-    }
-    
-    public void setRadius(double r)
-    {
-        this.radius = r;
-    }
-    
+    /**
+     * Returns true if the circle contains the point passed
+     * in as a parameter, or false if it doesn't
+     * 
+     * @return - boolean - True if the circle contains the point, false if not
+     */
     public boolean isInside(Point2D.Double point)
     {
-        return false;
+        //The coordinates of the point passed in as a parameter
+        double x = point.getX();
+        double y = point.getY();
+        //The coordinates of the center of the circle
+        double xCenter = this.getCenter().getX();
+        double yCenter = this.getCenter().getY();
+        //The radius of the circle
+        double radius = this.getRadius();
+        //Uses the equation of a circle to determine whether or not the point is inside the circle
+        return (Math.pow((x - xCenter), 2) + Math.pow((y - yCenter), 2)) < (Math.pow(radius, 2));
     }
     
-    public boolean isOnBorder(Point2D.Double point)
-    {
-        return false;
-    }
-    
+    /**
+     * Draws the circle
+     */
     public void draw(Graphics2D g2, boolean filled)
     {
+        //Calculates the coordinates of the top left corner
+        //of the rectangular frame that contains the circle
+        double xTopLeft = this.getCenter().getX() - this.getRadius();
+        double yTopLeft = this.getCenter().getY() - this.getRadius();
         
+        //Calculates the diameter of the circle
+        double diameter = this.getRadius() * 2;
+        
+        //Initializes the circle to a new ellipse
+        Ellipse2D.Double circle = new Ellipse2D.Double(xTopLeft, yTopLeft, diameter, diameter);
+        
+        //Sets the color
+        g2.setColor(this.getColor());
+        
+        if (filled)
+        {
+            //If the circle should be filled, fill it
+            g2.fill(circle);
+        }
+        
+        //Draws the circle
+        g2.draw(circle);
     }
 }
